@@ -1,28 +1,25 @@
 package com.boztalay.rootbeeroflife;
 
+import java.util.Calendar;
 
 public class RootbeerOfLifeRunner {
 	private static final int GRID_SIZE = 25;
-	
-	private static RootbeerOfLife rootbeerOfLife;
-	
+
+	private RootbeerOfLife rootbeerOfLife;
+
 	public static void main(String[] args) {
+		new RootbeerOfLifeRunner().runRootbeerOfLife();
+	}
+	
+	public void runRootbeerOfLife() {
 		rootbeerOfLife = new RootbeerOfLife(GRID_SIZE, GRID_SIZE);
-		
-		while(true) {
-			System.out.println();
-			for(int y = GRID_SIZE - 1; y >= 0; y--) {
-				for(int x = 0; x < GRID_SIZE; x++) {
-					if(rootbeerOfLife.isCellAlive(x, y)) {
-						System.out.print('.');
-					} else {
-						System.out.print('#');
-					}
-				}
-				System.out.println();
-			}
-			
+
+		long startTime = Calendar.getInstance().getTimeInMillis();
+
+		for(int i = 0; i < 10000; i++) {
 			rootbeerOfLife.runGeneration();
 		}
+
+		System.out.println("Finished in " + ( Calendar.getInstance().getTimeInMillis() - startTime ) + "ms");
 	}
 }

@@ -1,0 +1,24 @@
+<project>
+	<target name="clean">
+		<delete dir="bin" />
+		<delete dir="${user.home}/.rootbeer" />
+	</target>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="bin/classes" />
+		<javac srcdir="src" destdir="bin/classes" classpath="libs/Rootbeer.jar" />
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="bin/RootbeerOfLife-NoRootbeer.jar" basedir="bin/classes">
+			<manifest>
+				<attribute name="Main-Class" value="com.boztalay.rootbeeroflife.RootbeerOfLifeRunner" />
+			</manifest>
+		</jar>
+		
+		<java jar="libs/Rootbeer.jar" fork="true">
+			<arg value="bin/RootbeerOfLife-NoRootbeer.jar" />
+			<arg value="bin/RootbeerOfLife.jar" />
+		</java>
+	</target>
+</project>
