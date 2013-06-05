@@ -3,7 +3,7 @@ package com.boztalay.rootbeeroflife;
 import java.util.Calendar;
 
 public class RootbeerOfLifeRunner {
-	private static final int GRID_SIZE = 25;
+	private static final int GRID_SIZE = 250;
 
 	private RootbeerOfLife rootbeerOfLife;
 
@@ -16,7 +16,7 @@ public class RootbeerOfLifeRunner {
 
 		long startTime = Calendar.getInstance().getTimeInMillis();
 
-		for(int i = 0; i < 10000; i++) {
+		for(int i = 0; i < 100; i++) {
 			rootbeerOfLife.runGeneration();
 		}
 

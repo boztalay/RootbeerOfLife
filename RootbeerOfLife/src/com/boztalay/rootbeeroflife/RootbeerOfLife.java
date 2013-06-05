@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.syr.pcpratts.rootbeer.runtime.Kernel;
 import edu.syr.pcpratts.rootbeer.runtime.Rootbeer;
+import edu.syr.pcpratts.rootbeer.runtime.StatsRow;
 
 public class RootbeerOfLife {
 	private boolean[][] cellGrid;
@@ -12,6 +13,7 @@ public class RootbeerOfLife {
 	private int gridHeight;
 
 	private Rootbeer rootbeer;
+	private int numberOfGenerations;
 
 	public RootbeerOfLife(int gridWidth, int gridHeight) {
 		this.gridWidth = gridWidth;
@@ -21,7 +23,8 @@ public class RootbeerOfLife {
 		lastGrid = new boolean[gridWidth][gridHeight];
 
 		rootbeer = new Rootbeer();
-
+		numberOfGenerations = 0;
+		
 		resetAndSeedGame();
 	}
 
@@ -52,6 +55,21 @@ public class RootbeerOfLife {
 		}
 
 		rootbeer.runAll(cellJobs);
+		
+		StatsRow stats = rootbeer.getStats().get(0);
+		
+		System.out.println("-------------------");
+		System.out.println("Generation " + numberOfGenerations + " Stats");
+		System.out.println("Ran on GPU:\t\t" + rootbeer.getRanGpu());
+		System.out.println("Initialization time:\t" + stats.getInitTime());
+		System.out.println("Serialization time:\t" + stats.getSerializationTime());
+		System.out.println("Execution time:\t\t" + stats.getExecutionTime());
+		System.out.println("Deserialization time:\t" + stats.getDeserializationTime());
+		System.out.println("Total time:\t\t" + stats.getOverallTime());
+		System.out.println("Number of blocks:\t" + stats.getNumBlocks());
+		System.out.println("Number of threads:\t" + stats.getNumThreads());
+		
+		numberOfGenerations++;
 	}
 
 	private void copyCellGridToLastGrid() {
