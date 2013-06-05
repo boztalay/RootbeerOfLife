@@ -3,7 +3,7 @@ package com.boztalay.rootbeeroflife;
 import java.util.Calendar;
 
 public class RootbeerOfLifeRunner {
-	private static final int GRID_SIZE = 250;
+	private static final int GRID_SIZE = 500;
 
 	private RootbeerOfLife rootbeerOfLife;
 
